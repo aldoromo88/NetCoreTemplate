@@ -23,12 +23,12 @@ namespace NetCoreTemplate
             container.Register<IAppConfiguration>(appConfig);
         }
 
-        // protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
-        // {
-        //     var identityProvider = container.Resolve<IIdentityProvider>();
-        //     var statelessAuthConfig = new StatelessAuthenticationConfiguration(identityProvider.GetUserIdentity);
-        //     StatelessAuthentication.Enable(pipelines, statelessAuthConfig);
-        //     base.ApplicationStartup(container, pipelines);
-        // }
+        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        {
+            var identityProvider = container.Resolve<IIdentityProvider>();
+            var statelessAuthConfig = new StatelessAuthenticationConfiguration(identityProvider.GetUserIdentity);
+            StatelessAuthentication.Enable(pipelines, statelessAuthConfig);
+            base.ApplicationStartup(container, pipelines);
+        }
     }
 }

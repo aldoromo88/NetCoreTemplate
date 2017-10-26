@@ -2,44 +2,54 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Nancy;
+using Nancy.Extensions;
+using Nancy.Security;
 
 namespace NetCoreTemplate.Helpers
 {
   public static class ModuleExtensions
   {
-
-    /// <summary>
-    /// Declares a route for POST requests.
-    /// </summary>
-    /// <typeparam name="T">The return type of the <paramref name="action"/></typeparam>
-    /// <param name="path">The path that the route will respond to</param>
-    /// <param name="action">Action that will be invoked when the route it hit</param>
-    /// <param name="name">Name of the route</param>
-    /// <param name="condition">A condition to determine if the route can be hit</param>
-    public static void Post<TRequest, TResult>(this NancyModule module, string path, Func<TRequest, TResult> action, Func<NancyContext, bool> condition = null, string name = null) where TRequest : class
-    {
-      module.Post(path, args => {
-          TRequest dto = module.Context.ToDto<TRequest>();
-          return module.Response.AsJson(action(dto));
-      }, condition, name);
-    }
-
-
-    /// <summary>
-    /// Declares a route for POST requests.
-    /// </summary>
-    /// <typeparam name="T">The return type of the <paramref name="action"/></typeparam>
-    /// <param name="path">The path that the route will respond to</param>
-    /// <param name="action">Action that will be invoked when the route it hit</param>
-    /// <param name="name">Name of the route</param>
-    /// <param name="condition">A condition to determine if the route can be hit</param>
-    // public static void Post<TRequest, TResult>(this NancyModule module, string path, Func<TRequest, CancellationToken, Task<TResult>> action, Func<NancyContext, bool> condition = null, string name = null) where TRequest : class
+    // public static void Post(this NancyModule module, string path, Func<dynamic, object> action, string requiresRole)
     // {
-
-    //   TRequest dto = module.Context.ToDto<TRequest>();
-    //   Func<dynamic, CancellationToken, Task<TResult>> wrapper = (Func<dynamic, CancellationToken, Task<TResult>>)action;
-    //   module.Post(path, wrapper, condition, name);
+    //   module.Post(path, action, true, requiresRole);
     // }
 
+    // public static void Post(this NancyModule module, string path, Func<dynamic, object> action, bool requiresAuthentication = false, string requiresRole = null)
+    // {
+    //   module.Post(path, action, requiresAuthentication, requiresRole);
+    // }
+
+    // public static void Post<TRequest>(this NancyModule module, string path, Func<TRequest, object> action, bool requiresAuthentication = false, string requiresRole = null) where TRequest : class
+    // {
+    //   module.Post(path, args =>
+    //   {
+
+    //     if (requiresAuthentication)
+    //     {
+    //       module.RequiresAuthentication();
+    //     }
+
+    //     if (!string.IsNullOrEmpty(requiresRole))
+    //     {
+    //       module.RequiresRole(requiresRole);
+    //     }
+
+    //     TRequest dto = module.Context.ToDto<TRequest>();
+    //     return module.Response.AsJson(action(dto));
+    //   });
+    // }
+
+    public static void RequiresRole(this NancyModule module, string role)
+    {
+      module.AddBeforeHookOrExecute(ctx =>
+      {
+        Response response = null;
+        if ((ctx.CurrentUser == null) || !ctx.CurrentUser.IsInRole(role))
+        {
+          response = new Response { StatusCode = HttpStatusCode.Forbidden };
+        }
+        return response;
+      }, $"Role {role} is required");
+    }
   }
 }

@@ -14,10 +14,10 @@ namespace NetCoreTemplate.Infrastructure.Cqrs
 {
     public class CqrsModule : NancyModule
     {
-        public CqrsModule(TinyIoCContainer container, IIdentityProvider identityProvider)
+        public CqrsModule(TinyIoCContainer container)
         {
-            var statelessAuthConfig = new StatelessAuthenticationConfiguration(identityProvider.GetUserIdentity);
-            StatelessAuthentication.Enable(this, statelessAuthConfig);
+            // var statelessAuthConfig = new StatelessAuthenticationConfiguration(identityProvider.GetUserIdentity);
+            // StatelessAuthentication.Enable(this, statelessAuthConfig);
 
             this.RequiresAuthentication();
 
