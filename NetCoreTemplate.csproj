@@ -4,7 +4,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="..\wwwroot\"/>
+    <Folder Include="wwwroot\"/>
+    <Folder Include="node_modules\"/>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0"/>
@@ -12,5 +13,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3"/>
     <PackageReference Include="jose-jwt" Version="2.4.0"/>
     <PackageReference Include="Nancy.Authentication.Stateless" Version="2.0.0-clinteastwood"/>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.0"/>
   </ItemGroup>
 </Project>

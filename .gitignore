@@ -1,9 +1,12 @@
 .DS_Store
 node_modules/
 dist/
+wwwroot/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+obj/
+bin/
 
 # Editor directories and files
 .idea

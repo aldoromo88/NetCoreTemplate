@@ -1,5 +1,3 @@
-
-
 using System;
 using Nancy;
 using Nancy.Security;

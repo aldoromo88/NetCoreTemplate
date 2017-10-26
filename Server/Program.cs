@@ -19,6 +19,7 @@ namespace NetCoreTemplate
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                //.UseContentRoot(Directory.GetParent(Directory.GetCurrentDirectory()).ToString())
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseKestrel()
                 .UseStartup<Startup>()

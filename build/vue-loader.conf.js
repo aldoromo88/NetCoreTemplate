@@ -11,9 +11,9 @@ module.exports = {
     extract: isProduction
   }),
   transformToRequire: {
-    video: 'src',
-    source: 'src',
-    img: 'src',
+    video: 'Client',
+    source: 'Client',
+    img: 'Client',
     image: 'xlink:href'
   }
 }

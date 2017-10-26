@@ -1,15 +1,31 @@
 {
-    "version": "0.1.0",
-    "command": "dotnet",
-    "isShellCommand": true,
-    "args": [],
+    // "version": "0.1.0",
+    // "command": "dotnet",
+    // "isShellCommand": true,
+    // "args": [],
+    // "tasks": [
+    //     {
+    //         "taskName": "build",
+    //         "args": [
+    //             "${workspaceRoot}/Server/NetCoreTemplate.csproj"
+    //         ],
+    //         "isBuildCommand": true,
+    //         "problemMatcher": "$msCompile"
+    //     }
+    // ],
+
+
+    "version": "2.0.0",
     "tasks": [
         {
+            "taskName": "buildClient",
+            "type": "shell",
+            "command": "npm run build"
+        },
+        {
             "taskName": "build",
-            "args": [
-                "${workspaceRoot}/Server/NetCoreTemplate.csproj"
-            ],
-            "isBuildCommand": true,
+            "type": "shell",
+            "command": "dotnet build",
             "problemMatcher": "$msCompile"
         }
     ]
