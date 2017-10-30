@@ -19,7 +19,6 @@ namespace NetCoreTemplate
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             base.ConfigureApplicationContainer(container);
-
             container.Register<IAppConfiguration>(appConfig);
         }
 

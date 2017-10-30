@@ -10,7 +10,7 @@ namespace NetCoreTemplate.Infrastructure.ModuleRouting
   // {
   //   public MainModule()
   //   {
-  //     Get("/", args =>{
+  //     Get("/{uri*}", _ =>{
   //       return View["index.html"];
   //     } );
   //   }

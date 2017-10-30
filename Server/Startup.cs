@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Nancy;
 using Nancy.Owin;
 using NetCoreTemplate.Config;
+using NetCoreTemplate.Infrastructure.Middleware;
 
 namespace NetCoreTemplate
 {
@@ -19,12 +22,13 @@ namespace NetCoreTemplate
       config = builder.Build();
     }
 
+
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
       var appConfig = new AppConfiguration();
       ConfigurationBinder.Bind(config, appConfig);
 
-
+      
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
@@ -34,9 +38,14 @@ namespace NetCoreTemplate
         });
       }
 
-      app.UseDefaultFiles();
+      //app.UseDefaultFiles();
+      app.UseDefaultSinglePageFile();
       app.UseStaticFiles();
-      app.UseOwin(x => x.UseNancy(opt => opt.Bootstrapper = new SimpleBootstrapper(appConfig)));
+      app.UseOwin(x => x.UseNancy(opt =>
+      {
+        opt.Bootstrapper = new SimpleBootstrapper(appConfig);
+        opt.PassThroughWhenStatusCodesAre(HttpStatusCode.NotFound, HttpStatusCode.InternalServerError);
+      }));
     }
   }
 }
