@@ -1,11 +1,11 @@
 using System.Security.Claims;
-using Nancy;
+using Microsoft.AspNetCore.Http;
 
 namespace NetCoreTemplate.Infrastructure.Authentication.Contracts
 {
     public interface IIdentityProvider
     {
-        ClaimsPrincipal GetUserIdentity(NancyContext context);
+        ClaimsPrincipal GetUserIdentity(HttpContext context);
         string AuthenticateUser(string userLogin, string password);
     }
 }

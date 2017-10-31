@@ -2,10 +2,10 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace NetCoreTemplate.Infrastructure.Middleware
+namespace NetCoreTemplate.Infrastructure.Middleware.DefaultSinglePageFile
 {
 
-  public static class DefaultSinglePageFile
+  public static class DefaultSinglePageFileExtension
   {
 
     public static IApplicationBuilder UseDefaultSinglePageFile(this IApplicationBuilder app, string defaultSinglePageFile = "index.html")

@@ -1,6 +1,6 @@
 using NetCoreTemplate.Api.Users.Dtos;
 
-namespace NetCoreTemplate.Api.Users.Dtos.Commands
+namespace NetCoreTemplate.Api.Users.Commands
 {
 
     public class CreateUserCommand

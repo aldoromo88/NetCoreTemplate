@@ -1,10 +1,10 @@
 using NetCoreTemplate.Infrastructure.Authentication.Contracts;
 using System.Security.Claims;
-using Nancy;
 using Jose;
 using System;
 using NetCoreTemplate.Config;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace NetCoreTemplate.Infrastructure.Authentication
 {
@@ -18,11 +18,11 @@ namespace NetCoreTemplate.Infrastructure.Authentication
       _authSettings = appConfig.AuthSettings;
     }
 
-    public ClaimsPrincipal GetUserIdentity(NancyContext context)
+    public ClaimsPrincipal GetUserIdentity(HttpContext context)
     {
       try
       {
-        var authorizationHeader = context.Request.Headers.Authorization;
+        var authorizationHeader = context.Request.Headers["Authorization"][0];
         var jwt = authorizationHeader.Substring(_bearerDeclaration.Length);
 
         var authToken = Jose.JWT.Decode<AuthToken>(jwt, _authSettings.SecretKeyBytes, JwsAlgorithm.HS256);

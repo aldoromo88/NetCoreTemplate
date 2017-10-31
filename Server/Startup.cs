@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nancy;
-using Nancy.Owin;
 using NetCoreTemplate.Config;
-using NetCoreTemplate.Infrastructure.Middleware;
+using NetCoreTemplate.Infrastructure.Authentication;
+using NetCoreTemplate.Infrastructure.Authentication.Contracts;
+using NetCoreTemplate.Infrastructure.Middleware.ApiHandler;
+using NetCoreTemplate.Infrastructure.Middleware.ApiHandler.Contracts;
+using NetCoreTemplate.Infrastructure.Middleware.DefaultSinglePageFile;
 
 namespace NetCoreTemplate
 {
@@ -22,13 +24,21 @@ namespace NetCoreTemplate
       config = builder.Build();
     }
 
+    public void ConfigureServices(IServiceCollection services)
+    {
+      services.AddTransient<IIdentityProvider, IdentityProvider>();
+
+      var appConfig = new AppConfiguration();
+      ConfigurationBinder.Bind(config, appConfig);
+      services.AddSingleton<IAppConfiguration>(appConfig);
+      services.RegisterAllOpenImplementationsOf<IApiHandler>();
+    }
+
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
-      var appConfig = new AppConfiguration();
-      ConfigurationBinder.Bind(config, appConfig);
 
-      
+
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
@@ -38,14 +48,10 @@ namespace NetCoreTemplate
         });
       }
 
-      //app.UseDefaultFiles();
       app.UseDefaultSinglePageFile();
       app.UseStaticFiles();
-      app.UseOwin(x => x.UseNancy(opt =>
-      {
-        opt.Bootstrapper = new SimpleBootstrapper(appConfig);
-        opt.PassThroughWhenStatusCodesAre(HttpStatusCode.NotFound, HttpStatusCode.InternalServerError);
-      }));
+      app.UseApiHandler();
+      app.UseOwin();
     }
   }
 }

@@ -1,0 +1,128 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2017-10-31T22:20:10.716Z",
+	"__export_source": "insomnia.desktop.app:v5.9.6",
+	"resources": [
+		{
+			"_id": "wrk_22f0e27ce77342b286e8955f36994e6f",
+			"parentId": null,
+			"modified": 1508444846751,
+			"created": 1508444846751,
+			"name": "nancyTest",
+			"description": "",
+			"certificates": [],
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_98ad8d31e0604fa09c1835e673bd1847",
+			"parentId": "wrk_22f0e27ce77342b286e8955f36994e6f",
+			"modified": 1508444846757,
+			"created": 1508444846757,
+			"name": "Base Environment",
+			"data": {},
+			"color": null,
+			"isPrivate": false,
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_41debcc8fd794959bcbe6f7d0ad11e86",
+			"parentId": "wrk_22f0e27ce77342b286e8955f36994e6f",
+			"modified": 1508444846754,
+			"created": 1508444846754,
+			"name": "Default Jar",
+			"cookies": [],
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_2223362ac1b34d3f8c11d73071f2fa35",
+			"parentId": "wrk_22f0e27ce77342b286e8955f36994e6f",
+			"modified": 1509487833436,
+			"created": 1508507316367,
+			"url": "http://localhost:5000/api/command",
+			"name": "CreateUserCommand",
+			"description": "",
+			"method": "POST",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"$type\":\"NetCoreTemplate.Api.Users.Commands.CreateUserCommand, NetCoreTemplate\",\n\t\"NewUser\":{\n\t\t\"Name\":\"Aldo\",\n\t\t\"Age\":29\n\t}\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_01fba6a488e84f32bb1e8cff09988587"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1508507316367,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_0253dffe71d04214be69b3dab0edeabb",
+			"parentId": "wrk_22f0e27ce77342b286e8955f36994e6f",
+			"modified": 1509487822637,
+			"created": 1508533862548,
+			"url": "http://localhost:5000/api/command",
+			"name": "LoginCommand",
+			"description": "",
+			"method": "POST",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"$type\":\"NetCoreTemplate.Api.Users.Commands.LoginCommand, NetCoreTemplate\",\n\t\"UserLogin\": \"Aldo.Romo\",\n\t\"Password\": \"Ohlala\"\t\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_c4db0273a0a44af6b2707403f452046b"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1508533862548,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_4265f291917c46ee918722e2c82af82e",
+			"parentId": "wrk_22f0e27ce77342b286e8955f36994e6f",
+			"modified": 1509487959589,
+			"created": 1509487808134,
+			"url": "http://localhost:5000/api/query",
+			"name": "UserInfoQuery",
+			"description": "",
+			"method": "POST",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"$type\":\"NetCoreTemplate.Api.Users.Queries.UserDataQuery, NetCoreTemplate\",\n\t\"Id\": \"B9A6CEE9-4487-42AE-BB49-ED12B983FEE3\"\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_c4db0273a0a44af6b2707403f452046b"
+				}
+			],
+			"authentication": {
+				"type": "bearer",
+				"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIyMjgwOTE5Yy05OWU0LTQzMGItOTU5Ny0zZTU0NjY3YTMyNzYiLCJVc2VyTmFtZSI6IkFsZG8uUm9tbyIsIlVzZXJMb2dpbiI6IkFsZG8uUm9tbyIsIlJvbGVzIjpbIkN1c3RvbWVyIl0sIkV4cGlyYXRpb25EYXRlVGltZSI6IjIwMTctMTEtMDVUMjI6MDc6NDYuNjEyOTEzN1oifQ.cf9y9HKGWYAHxch8YK40hGhSKaNhOkgwPDzyNZ7S25E"
+			},
+			"metaSortKey": -1508520589457.5,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		}
+	]
+}
